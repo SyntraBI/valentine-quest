@@ -11,23 +11,23 @@ interface Question {
 }
 
 const questions: Question[] = [
-  { question: "What flower is most associated with Valentine's Day?", options: ["Tulip", "Rose", "Lily", "Daisy"], correct: 1 },
-  { question: "Which Greek god is associated with love?", options: ["Zeus", "Apollo", "Eros", "Hermes"], correct: 2 },
-  { question: "What does a red heart emoji symbolize?", options: ["Friendship", "Deep love", "Sadness", "Anger"], correct: 1 },
-  { question: "In which month is Valentine's Day celebrated?", options: ["January", "February", "March", "April"], correct: 1 },
-  { question: "What animal is a symbol of love and peace?", options: ["Eagle", "Dove", "Swan", "Parrot"], correct: 1 },
-  { question: "What shape is most associated with love?", options: ["Circle", "Star", "Heart", "Diamond"], correct: 2 },
-  { question: "Which color symbolizes love and passion?", options: ["Blue", "Green", "Red", "Yellow"], correct: 2 },
-  { question: "Who shoots arrows of love?", options: ["Cupid", "Santa", "Fairy", "Angel"], correct: 0 },
-  { question: "What do couples exchange on Valentine's Day?", options: ["Books", "Gifts & chocolates", "Tools", "Tickets"], correct: 1 },
-  { question: "Love is patient, love is... ?", options: ["Fast", "Kind", "Loud", "Shy"], correct: 1 },
+  { question: "What is the language of love?", options: ["English", "French", "Spanish", "Italian"], correct: 1 },
+  { question: "Which gemstone represents love?", options: ["Diamond", "Ruby", "Sapphire", "Emerald"], correct: 1 },
+  { question: "Who wrote Romeo and Juliet?", options: ["Dickens", "Shakespeare", "Austen", "Hemingway"], correct: 1 },
+  { question: "What city is called the City of Love?", options: ["Rome", "Venice", "Paris", "Barcelona"], correct: 2 },
+  { question: "What's a love potion number?", options: ["7", "8", "9", "10"], correct: 2 },
+  { question: "Which planet symbolizes love?", options: ["Mars", "Venus", "Jupiter", "Mercury"], correct: 1 },
+  { question: "What's the most romantic meal?", options: ["Breakfast", "Lunch", "Dinner", "Brunch"], correct: 2 },
+  { question: "Which bird mates for life?", options: ["Crow", "Penguin", "Sparrow", "Eagle"], correct: 1 },
+  { question: "What's the traditional first anniversary gift?", options: ["Gold", "Silver", "Paper", "Wood"], correct: 2 },
+  { question: "Love is all you...?", options: ["Want", "Need", "Have", "Give"], correct: 1 },
 ];
 
-interface QuizPageProps {
+interface Quiz2Props {
   onComplete: () => void;
 }
 
-const QuizPage: React.FC<QuizPageProps> = ({ onComplete }) => {
+const Quiz2: React.FC<Quiz2Props> = ({ onComplete }) => {
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
@@ -42,8 +42,8 @@ const QuizPage: React.FC<QuizPageProps> = ({ onComplete }) => {
     if (idx === questions[current].correct) {
       setScore((s) => s + 1);
     }
-    // Show romantic arrow at question 5
-    if (current === 4) {
+    // Show romantic arrow at certain questions
+    if (current === 3 || current === 7) {
       setTimeout(() => setShowArrow(true), 500);
     }
   };
@@ -59,13 +59,13 @@ const QuizPage: React.FC<QuizPageProps> = ({ onComplete }) => {
     }
   };
 
+  const q = questions[current];
+
   const romanticMessages = [
     "K, are you missing me? 💕",
-    "You're my sunshine! ☀️💖",
-    "Forever and always 💗",
+    "Every moment with you is special 🌹",
+    "You make my heart flutter! 💗",
   ];
-
-  const q = questions[current];
 
   return (
     <div className="min-h-screen valentine-bg flex items-center justify-center p-4 relative overflow-hidden">
@@ -79,7 +79,6 @@ const QuizPage: React.FC<QuizPageProps> = ({ onComplete }) => {
       )}
 
       <div className="w-full max-w-lg relative z-10">
-        {/* Progress */}
         <div className="mb-6">
           <div className="flex justify-between text-sm font-body text-muted-foreground mb-2">
             <span>Question {current + 1} of {questions.length}</span>
@@ -160,12 +159,9 @@ const QuizPage: React.FC<QuizPageProps> = ({ onComplete }) => {
               <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 1.5 }}>
                 <Heart className="w-20 h-20 mx-auto text-primary fill-primary" />
               </motion.div>
-              <h2 className="text-3xl font-display text-gradient mt-4">Quiz Complete!</h2>
+              <h2 className="text-3xl font-display text-gradient mt-4">Quiz 2 Complete!</h2>
               <p className="text-xl font-body text-foreground mt-2">
                 You scored {score}/{questions.length} 💕
-              </p>
-              <p className="text-muted-foreground font-body mt-2">
-                {score >= 8 ? "You're a love expert! 🌹" : score >= 5 ? "Not bad, sweetheart! 💖" : "Keep learning about love! 💗"}
               </p>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -184,4 +180,4 @@ const QuizPage: React.FC<QuizPageProps> = ({ onComplete }) => {
   );
 };
 
-export default QuizPage;
+export default Quiz2;
