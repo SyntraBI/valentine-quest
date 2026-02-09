@@ -22,11 +22,12 @@ const App = () => {
   const [screen, setScreen] = useState<Screen>('login');
   const [completed, setCompleted] = useState<ActivityType[]>([]);
 
+  const goHome = () => setScreen('dashboard');
+
   const markComplete = (activity: ActivityType) => {
     if (!completed.includes(activity)) {
       setCompleted([...completed, activity]);
     }
-    // Check if all activities are done
     const allActivities: ActivityType[] = ['quiz1', 'quiz2', 'quiz3', 'game1', 'game2', 'gift1', 'gift2', 'gift3'];
     if ([...completed, activity].length === allActivities.length) {
       setScreen('finale');
@@ -40,28 +41,23 @@ const App = () => {
       case 'login':
         return <LoginPage onSuccess={() => setScreen('dashboard')} />;
       case 'dashboard':
-        return (
-          <Dashboard 
-            completed={completed} 
-            onSelect={(activity) => setScreen(activity)} 
-          />
-        );
+        return <Dashboard completed={completed} onSelect={(activity) => setScreen(activity)} />;
       case 'quiz1':
-        return <QuizPage onComplete={() => markComplete('quiz1')} />;
+        return <QuizPage onComplete={() => markComplete('quiz1')} onGoHome={goHome} />;
       case 'quiz2':
-        return <Quiz2 onComplete={() => markComplete('quiz2')} />;
+        return <Quiz2 onComplete={() => markComplete('quiz2')} onGoHome={goHome} />;
       case 'quiz3':
-        return <Quiz3 onComplete={() => markComplete('quiz3')} />;
+        return <Quiz3 onComplete={() => markComplete('quiz3')} onGoHome={goHome} />;
       case 'game1':
-        return <MemoryGame onComplete={() => markComplete('game1')} />;
+        return <MemoryGame onComplete={() => markComplete('game1')} onGoHome={goHome} />;
       case 'game2':
-        return <CatchHeartsGame onComplete={() => markComplete('game2')} />;
+        return <CatchHeartsGame onComplete={() => markComplete('game2')} onGoHome={goHome} />;
       case 'gift1':
-        return <GiftReveal giftNumber={1} onComplete={() => markComplete('gift1')} />;
+        return <GiftReveal giftNumber={1} onComplete={() => markComplete('gift1')} onGoHome={goHome} />;
       case 'gift2':
-        return <GiftReveal giftNumber={2} onComplete={() => markComplete('gift2')} />;
+        return <GiftReveal giftNumber={2} onComplete={() => markComplete('gift2')} onGoHome={goHome} />;
       case 'gift3':
-        return <GiftReveal giftNumber={3} onComplete={() => markComplete('gift3')} />;
+        return <GiftReveal giftNumber={3} onComplete={() => markComplete('gift3')} onGoHome={goHome} />;
       case 'finale':
         return <ValentineFinale />;
     }
