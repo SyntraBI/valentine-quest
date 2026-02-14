@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import QuizPage from "./pages/QuizPage";
 import Quiz2 from "./pages/Quiz2";
 import Quiz3 from "./pages/Quiz3";
@@ -15,14 +16,15 @@ import ValentineFinale from "./pages/ValentineFinale";
 
 const queryClient = new QueryClient();
 
-type Screen = 'login' | 'dashboard' | 'quiz1' | 'quiz2' | 'quiz3' | 'game1' | 'game2' | 'gift1' | 'gift2' | 'gift3' | 'finale';
+type Screen = 'login' | 'dashboard' | 'admin' | 'quiz1' | 'quiz2' | 'quiz3' | 'game1' | 'game2' | 'gift1' | 'gift2' | 'gift3' | 'finale';
 type ActivityType = 'quiz1' | 'quiz2' | 'quiz3' | 'game1' | 'game2' | 'gift1' | 'gift2' | 'gift3';
 
 const App = () => {
   const [screen, setScreen] = useState<Screen>('login');
   const [completed, setCompleted] = useState<ActivityType[]>([]);
+  const [role, setRole] = useState<'user' | 'admin'>('user');
 
-  const goHome = () => setScreen('dashboard');
+  const goHome = () => setScreen(role === 'admin' ? 'admin' : 'dashboard');
 
   const markComplete = (activity: ActivityType) => {
     if (!completed.includes(activity)) {
@@ -32,16 +34,28 @@ const App = () => {
     if ([...completed, activity].length === allActivities.length) {
       setScreen('finale');
     } else {
-      setScreen('dashboard');
+      setScreen(role === 'admin' ? 'admin' : 'dashboard');
     }
+  };
+
+  const handleLogin = (loginRole: 'user' | 'admin') => {
+    setRole(loginRole);
+    setScreen(loginRole === 'admin' ? 'admin' : 'dashboard');
+  };
+
+  const handleLogout = () => {
+    setRole('user');
+    setScreen('login');
   };
 
   const renderScreen = () => {
     switch (screen) {
       case 'login':
-        return <LoginPage onSuccess={() => setScreen('dashboard')} />;
+        return <LoginPage onSuccess={handleLogin} />;
       case 'dashboard':
         return <Dashboard completed={completed} onSelect={(activity) => setScreen(activity)} />;
+      case 'admin':
+        return <AdminDashboard onNavigate={(s) => setScreen(s as Screen)} onLogout={handleLogout} />;
       case 'quiz1':
         return <QuizPage onComplete={() => markComplete('quiz1')} onGoHome={goHome} />;
       case 'quiz2':
