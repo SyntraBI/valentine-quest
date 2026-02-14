@@ -12,22 +12,25 @@ interface GiftRevealProps {
 
 const giftData = {
   1: {
-    title: "My Promise",
-    message: "I promise to always be there for you, through every laugh and every tear. You're my forever person. 💖",
+    title: "Kaise Shuru Hua ❤️",
+    message: "Ek din bas maine uski Instagram story pe ek simple sa reply kiya — \"Nice Food👌\"\n\nUsne rudely \"Thank you\" likha… fir thodi baat hui… fir thodi aur.\n\nKaun jaanta tha ki ek chota sa reply itna bada connection ban jayega. 💖",
     emoji: "💌",
     color: "from-valentine-rose to-valentine-pink",
+    story: "Pehle sirf random chats thi, phir good morning texts, phir late night calls. Dheere dheere hum ek dusre ki aadat ban gaye. Din bhar ka har chota update ek dusre ko batana normal ho gaya.\n\nInternet pe mile the… par feelings bilkul real thi. 💕",
   },
   2: {
-    title: "Our Memories",
-    message: "Every moment with you becomes a treasured memory. From our first hello to our millionth 'I love you'. 🌹",
+    title: "Ups & Downs 🌹",
+    message: "Phir dating start hui. Sab perfect nahi tha.\nKabhi misunderstandings, kabhi ego, kabhi fights.\nKabhi din bhar baat nahi hoti thi, kabhi raat bhar ro kar soye.\n\nUps and downs aaye. Emotional lows aaye.\nKabhi laga chhod dena chahiye…\nPar har baar humne choose kiya — ek dusre ko. 💗",
     emoji: "📸",
     color: "from-valentine-gold to-valentine-rose",
+    story: "Kaun soch sakta tha ki ek simple si Instagram story pe reply se start hui baat, aaj meri har subah aur har raat ka part ban jayegi. Ab tum sirf chat list ka naam nahi, meri daily life ka sabse important hissa ho. 🌟",
   },
   3: {
-    title: "Forever Yours",
-    message: "My heart, my soul, my everything belongs to you. Today, tomorrow, and always. You complete me. 💝",
+    title: "Forever Yours 💍",
+    message: "Aaj bhi perfect nahi hai.\nPar sach hai. Real hai. Aur hum dono ki hai.\n\nKabhi kabhi life ke sabse important log kisi planned meeting se nahi, ek simple \"story reply\" se milte hain.\n\nAur relationship perfect hone se nahi, saath rehne ki choice se strong hota hai. 💝",
     emoji: "💍",
     color: "from-valentine-crimson to-valentine-rose",
+    story: "My heart, my soul, my everything belongs to you. Today, tomorrow, and always. You complete me. Happy Valentine's Day, my love. ✨❤️",
   },
 };
 
@@ -87,16 +90,28 @@ const GiftReveal: React.FC<GiftRevealProps> = ({ giftNumber, onComplete, onGoHom
               {!isOpening && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-6 text-muted-foreground font-body">Tap the gift to open! ✨</motion.p>}
             </motion.div>
           ) : (
-            <motion.div key="gift-content" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', damping: 15 }} className="glass-card p-8 text-center">
-              <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 5, -5, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="text-6xl mb-4">{gift.emoji}</motion.div>
-              <h2 className="text-2xl font-display text-gradient mb-4">{gift.title}</h2>
-              <p className="font-body text-foreground text-lg leading-relaxed mb-6">{gift.message}</p>
-              <div className="flex justify-center gap-2 mb-6">
+            <motion.div key="gift-content" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', damping: 15 }} className="glass-card p-8 text-center relative overflow-hidden">
+              {/* Background romantic overlay */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-br from-valentine-rose via-valentine-pink to-valentine-crimson" />
+                <div className="absolute top-4 left-4 text-6xl">💑</div>
+                <div className="absolute bottom-4 right-4 text-6xl">💏</div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl opacity-20">❤️</div>
+              </div>
+              <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 5, -5, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="text-6xl mb-4 relative z-10">{gift.emoji}</motion.div>
+              <h2 className="text-2xl font-display text-gradient mb-4 relative z-10">{gift.title}</h2>
+              <p className="font-body text-foreground text-base leading-relaxed mb-4 whitespace-pre-line relative z-10">{gift.message}</p>
+              {gift.story && (
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="relative z-10 mt-4 p-4 rounded-xl bg-primary/5 border border-primary/20">
+                  <p className="font-body text-muted-foreground text-sm leading-relaxed whitespace-pre-line italic">{gift.story}</p>
+                </motion.div>
+              )}
+              <div className="flex justify-center gap-2 mb-6 mt-4 relative z-10">
                 {['❤️', '💕', '💖', '💗', '💝'].map((heart, i) => (
                   <motion.span key={i} animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.1 }} className="text-2xl">{heart}</motion.span>
                 ))}
               </div>
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={onComplete} className="px-8 py-3 rounded-xl valentine-gradient text-primary-foreground font-body font-semibold glow-primary flex items-center gap-2 mx-auto">
+              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={onComplete} className="px-8 py-3 rounded-xl valentine-gradient text-primary-foreground font-body font-semibold glow-primary flex items-center gap-2 mx-auto relative z-10">
                 Back to Dashboard 🏠
               </motion.button>
             </motion.div>

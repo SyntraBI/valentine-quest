@@ -12,6 +12,21 @@ const bannerMessages = [
   "Almost at the finish line! 🎉",
   "Love is in the air! 🦋",
   "The best is yet to come! 💫",
+  "Tere bina kuch bhi nahi lagta 💔🔥",
+  "Tu meri neend hai, tu meri subah hai 🌙☀️",
+  "Tera chehra dekhe bina chain nahi aata 😍",
+  "Tujhpe marna meri aadat ban gayi hai 💀❤️",
+  "Teri baahon mein duniya bhool jaata hoon 🤗💕",
+  "Tu hasi toh lagta hai jannat mil gayi 😊🌹",
+  "Tere bina sab adhoora lagta hai 💔✨",
+  "Meri har dhadkan tera naam leti hai 💓",
+  "Tu meri zindagi ka sabse pyaara chapter hai 📖💖",
+  "Tera saath ho toh har rasta aasan hai 🛤️❤️",
+  "Tujhe dekh ke dil mein bijli si daudti hai ⚡💗",
+  "Tu meri favourite notification hai 📱😘",
+  "Tera ek msg aur din ban jaata hai 💌🔥",
+  "Meri playlist mein bas tu hai 🎵💝",
+  "Tujhse milke lagta hai kismat chamak gayi ✨😍",
 ];
 
 const photoEmojis = ['💑', '👫', '💏', '🥰', '😍', '🤗', '💃🕺', '🧸❤️', '🌹💕', '💌'];

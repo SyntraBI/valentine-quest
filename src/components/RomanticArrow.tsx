@@ -11,12 +11,12 @@ const RomanticArrow: React.FC<RomanticArrowProps> = ({ message, onComplete }) =>
     <motion.div
       initial={{ x: '-100vw', y: '50%', rotate: -15 }}
       animate={{ 
-        x: ['100vw', '0vw', '-100vw'],
-        rotate: [-15, 0, 15],
+        x: ['100vw', '0vw', '0vw', '-100vw'],
+        rotate: [-15, 0, 0, 15],
       }}
       transition={{ 
-        duration: 4,
-        times: [0, 0.4, 1],
+        duration: 7,
+        times: [0, 0.25, 0.7, 1],
         ease: 'easeInOut'
       }}
       onAnimationComplete={onComplete}
