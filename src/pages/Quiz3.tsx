@@ -4,25 +4,7 @@ import { Heart, CheckCircle, XCircle, ArrowRight, Home } from 'lucide-react';
 import FloatingParticles from '../components/FloatingParticles';
 import RomanticArrow from '../components/RomanticArrow';
 import PlaneBanner from '../components/PlaneBanner';
-
-interface Question {
-  question: string;
-  options: string[];
-  correct: number;
-}
-
-const questions: Question[] = [
-  { question: "What's the sweetest thing to say?", options: ["Hello", "Goodbye", "I love you", "Thanks"], correct: 2 },
-  { question: "Best place for a date?", options: ["Library", "Beach sunset", "Gym", "Office"], correct: 1 },
-  { question: "What makes a heart skip?", options: ["Coffee", "Love", "Exercise", "Fear"], correct: 1 },
-  { question: "Symbol of eternal love?", options: ["Ring", "Necklace", "Bracelet", "Watch"], correct: 0 },
-  { question: "What's the love hormone?", options: ["Adrenaline", "Dopamine", "Oxytocin", "Serotonin"], correct: 2 },
-  { question: "Best love song era?", options: ["60s", "80s", "90s", "2000s"], correct: 1 },
-  { question: "True love is...?", options: ["Easy", "Patient", "Fast", "Loud"], correct: 1 },
-  { question: "Romantic movie classic?", options: ["Titanic", "Jaws", "Matrix", "Terminator"], correct: 0 },
-  { question: "Love at first...?", options: ["Word", "Touch", "Sight", "Song"], correct: 2 },
-  { question: "What heals all wounds?", options: ["Medicine", "Time", "Love", "Sleep"], correct: 2 },
-];
+import { getQuizQuestions, Question } from '../lib/quizData';
 
 const hindiMessages = [
   "जब तुम मुस्कुराती हो तो दिल खुश हो जाता है 😊",
@@ -43,6 +25,7 @@ interface Quiz3Props {
 }
 
 const Quiz3: React.FC<Quiz3Props> = ({ onComplete, onGoHome }) => {
+  const [questions] = useState<Question[]>(() => getQuizQuestions(3));
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);

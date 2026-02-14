@@ -4,25 +4,7 @@ import { Heart, CheckCircle, XCircle, ArrowRight, Home } from 'lucide-react';
 import FloatingParticles from '../components/FloatingParticles';
 import RomanticArrow from '../components/RomanticArrow';
 import PlaneBanner from '../components/PlaneBanner';
-
-interface Question {
-  question: string;
-  options: string[];
-  correct: number;
-}
-
-const questions: Question[] = [
-  { question: "What is the language of love?", options: ["English", "French", "Spanish", "Italian"], correct: 1 },
-  { question: "Which gemstone represents love?", options: ["Diamond", "Ruby", "Sapphire", "Emerald"], correct: 1 },
-  { question: "Who wrote Romeo and Juliet?", options: ["Dickens", "Shakespeare", "Austen", "Hemingway"], correct: 1 },
-  { question: "What city is called the City of Love?", options: ["Rome", "Venice", "Paris", "Barcelona"], correct: 2 },
-  { question: "What's a love potion number?", options: ["7", "8", "9", "10"], correct: 2 },
-  { question: "Which planet symbolizes love?", options: ["Mars", "Venus", "Jupiter", "Mercury"], correct: 1 },
-  { question: "What's the most romantic meal?", options: ["Breakfast", "Lunch", "Dinner", "Brunch"], correct: 2 },
-  { question: "Which bird mates for life?", options: ["Crow", "Penguin", "Sparrow", "Eagle"], correct: 1 },
-  { question: "What's the traditional first anniversary gift?", options: ["Gold", "Silver", "Paper", "Wood"], correct: 2 },
-  { question: "Love is all you...?", options: ["Want", "Need", "Have", "Give"], correct: 1 },
-];
+import { getQuizQuestions, Question } from '../lib/quizData';
 
 const hindiMessages = [
   "तुम बहुत खूबसूरत हो 🌸",
@@ -43,6 +25,7 @@ interface Quiz2Props {
 }
 
 const Quiz2: React.FC<Quiz2Props> = ({ onComplete, onGoHome }) => {
+  const [questions] = useState<Question[]>(() => getQuizQuestions(2));
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);

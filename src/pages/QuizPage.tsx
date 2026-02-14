@@ -4,25 +4,7 @@ import { Heart, CheckCircle, XCircle, ArrowRight, Home } from 'lucide-react';
 import FloatingParticles from '../components/FloatingParticles';
 import RomanticArrow from '../components/RomanticArrow';
 import PlaneBanner from '../components/PlaneBanner';
-
-interface Question {
-  question: string;
-  options: string[];
-  correct: number;
-}
-
-const questions: Question[] = [
-  { question: "What flower is most associated with Valentine's Day?", options: ["Tulip", "Rose", "Lily", "Daisy"], correct: 1 },
-  { question: "Which Greek god is associated with love?", options: ["Zeus", "Apollo", "Eros", "Hermes"], correct: 2 },
-  { question: "What does a red heart emoji symbolize?", options: ["Friendship", "Deep love", "Sadness", "Anger"], correct: 1 },
-  { question: "In which month is Valentine's Day celebrated?", options: ["January", "February", "March", "April"], correct: 1 },
-  { question: "What animal is a symbol of love and peace?", options: ["Eagle", "Dove", "Swan", "Parrot"], correct: 1 },
-  { question: "What shape is most associated with love?", options: ["Circle", "Star", "Heart", "Diamond"], correct: 2 },
-  { question: "Which color symbolizes love and passion?", options: ["Blue", "Green", "Red", "Yellow"], correct: 2 },
-  { question: "Who shoots arrows of love?", options: ["Cupid", "Santa", "Fairy", "Angel"], correct: 0 },
-  { question: "What do couples exchange on Valentine's Day?", options: ["Books", "Gifts & chocolates", "Tools", "Tickets"], correct: 1 },
-  { question: "Love is patient, love is... ?", options: ["Fast", "Kind", "Loud", "Shy"], correct: 1 },
-];
+import { getQuizQuestions, Question } from '../lib/quizData';
 
 const hindiMessages = [
   "K, क्या तुम मुझे याद कर रही हो? 💕",
@@ -43,6 +25,7 @@ interface QuizPageProps {
 }
 
 const QuizPage: React.FC<QuizPageProps> = ({ onComplete, onGoHome }) => {
+  const [questions] = useState<Question[]>(() => getQuizQuestions(1));
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);

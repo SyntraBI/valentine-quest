@@ -3,20 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Lock } from 'lucide-react';
 import FloatingParticles from '../components/FloatingParticles';
 
-const CORRECT_PASSWORD = 'ish@2909';
-
-const Login: React.FC = () => {
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
-  const [onLogin, setOnLogin] = useState<(() => void) | null>(null);
-
-  // We receive onLogin via props from App
-  return null; // placeholder - actual component below
-};
+const USER_PASSWORD = 'ish@2909';
+const ADMIN_PASSWORD = 'Werks@123';
 
 interface LoginPageProps {
-  onSuccess: () => void;
+  onSuccess: (role: 'user' | 'admin') => void;
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
@@ -26,9 +17,12 @@ const LoginPage: React.FC<LoginPageProps> = ({ onSuccess }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === CORRECT_PASSWORD) {
+    if (password === USER_PASSWORD) {
       setSuccess(true);
-      setTimeout(onSuccess, 1500);
+      setTimeout(() => onSuccess('user'), 1500);
+    } else if (password === ADMIN_PASSWORD) {
+      setSuccess(true);
+      setTimeout(() => onSuccess('admin'), 1500);
     } else {
       setError('Wrong password, my love! 💔');
       setTimeout(() => setError(''), 2000);
