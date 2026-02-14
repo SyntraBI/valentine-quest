@@ -5,8 +5,8 @@ export interface Question {
 }
 
 const defaultQuiz1: Question[] = [
-  { question: "What flower is most associated with Valentine's Day?", options: ["Tulip", "Rose", "Lily", "Daisy"], correct: 1 },
-  { question: "Which Greek god is associated with love?", options: ["Zeus", "Apollo", "Eros", "Hermes"], correct: 2 },
+  { question: "I Know Apko Sab Pta Hai Tab Be Mai Kuch Puch Leta Hu ???  May I", options: ["Start Karu", "Ha Ha Karo Start", "Nhi Pta Mujhe", "Answer 1 & 2 Mai Se Hai"], correct: 2 },
+  { question: "Mera Fav Food Kya hai ???", options: ["Zeus", "Apollo", "Eros", "Hermes"], correct: 2 },
   { question: "What does a red heart emoji symbolize?", options: ["Friendship", "Deep love", "Sadness", "Anger"], correct: 1 },
   { question: "In which month is Valentine's Day celebrated?", options: ["January", "February", "March", "April"], correct: 1 },
   { question: "What animal is a symbol of love and peace?", options: ["Eagle", "Dove", "Swan", "Parrot"], correct: 1 },
@@ -43,26 +43,14 @@ const defaultQuiz3: Question[] = [
   { question: "What heals all wounds?", options: ["Medicine", "Time", "Love", "Sleep"], correct: 2 },
 ];
 
-const STORAGE_KEY = 'valentine_quiz_data';
-
+// Quiz data is stored only in code - no localStorage persistence
 export function getQuizQuestions(quizNumber: 1 | 2 | 3): Question[] {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      const data = JSON.parse(stored);
-      if (data[`quiz${quizNumber}`]) return data[`quiz${quizNumber}`];
-    }
-  } catch {}
   return quizNumber === 1 ? defaultQuiz1 : quizNumber === 2 ? defaultQuiz2 : defaultQuiz3;
 }
 
 export function saveQuizQuestions(quizNumber: 1 | 2 | 3, questions: Question[]) {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    const data = stored ? JSON.parse(stored) : {};
-    data[`quiz${quizNumber}`] = questions;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  } catch {}
+  // Data is only stored in memory during app runtime
+  // No persistence needed
 }
 
 export function getAllDefaults() {

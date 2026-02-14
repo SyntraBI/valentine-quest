@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -23,6 +23,11 @@ const App = () => {
   const [screen, setScreen] = useState<Screen>('login');
   const [completed, setCompleted] = useState<ActivityType[]>([]);
   const [role, setRole] = useState<'user' | 'admin'>('user');
+
+  // Clear localStorage on app startup
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   const goHome = () => setScreen(role === 'admin' ? 'admin' : 'dashboard');
 

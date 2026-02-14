@@ -45,7 +45,7 @@ const ValentineFinale: React.FC = () => {
             Yayyy! 🎉
           </h1>
           <p className="text-xl md:text-2xl font-body text-foreground">
-            I knew you'd say yes! Happy Valentine's Day, my love! 🌹
+            I knew you'd say yes Gugu! Happy Valentine's Day, my love! Mujhe Pta Hi Tha I'm Your Gugu🌹
           </p>
           <div className="flex justify-center gap-4 mt-8 text-4xl">
             {['🧸', '❤️', '🌹', '💕', '🍫', '💖'].map((e, i) => (
